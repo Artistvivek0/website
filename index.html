@@ -1,0 +1,2571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEON//VOID — Digital Magazine</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --red: #e53935;
+            --dark-red: #7e1717;
+            --gold: #d8b36a;
+            --white: #f5f5f5;
+            --gray: #999;
+            --black: #050505;
+            --panel: rgba(8, 8, 8, 0.90);
+            --border: rgba(255,255,255,0.13);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Barlow Condensed", sans-serif;
+            color: var(--white);
+            background: #050505;
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           CINEMATIC BACKGROUND
+        ===================================================== */
+
+        .background-layer {
+            position: fixed;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.35),
+                    rgba(0,0,0,0.75)
+                ),
+                url("Lucia_Caminos_02.jpg")
+                center center / cover no-repeat;
+
+            z-index: -5;
+
+            transform: scale(1.04);
+
+            transition:
+                background-image 0.8s ease,
+                background-position 1.2s ease,
+                filter 1s ease,
+                opacity 1s ease;
+        }
+
+        .background-dark {
+            position: fixed;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,0.05) 0%,
+                    rgba(0,0,0,0.25) 35%,
+                    rgba(0,0,0,0.80) 72%,
+                    rgba(0,0,0,0.98) 100%
+                );
+
+            z-index: -4;
+
+            pointer-events: none;
+        }
+
+        .background-vignette {
+            position: fixed;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    ellipse at center,
+                    transparent 30%,
+                    rgba(0,0,0,0.75) 100%
+                );
+
+            z-index: -3;
+
+            pointer-events: none;
+        }
+
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    rgba(255,255,255,0.018) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.018) 1px,
+                    transparent 1px
+                );
+
+            background-size: 60px 60px;
+
+            z-index: -2;
+
+            pointer-events: none;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            background: rgba(5,5,5,0.72);
+
+            border-bottom: 1px solid rgba(255,255,255,0.10);
+
+            backdrop-filter: blur(14px);
+
+            z-index: 1000;
+
+            transition: 0.3s;
+        }
+
+        nav.scrolled {
+            background: rgba(5,5,5,0.96);
+        }
+
+        .logo {
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 21px;
+            font-weight: 800;
+
+            letter-spacing: 3px;
+        }
+
+        .logo span {
+            color: var(--red);
+        }
+
+        nav ul {
+            display: flex;
+
+            gap: 30px;
+
+            list-style: none;
+        }
+
+        nav ul a {
+            color: #ccc;
+
+            text-decoration: none;
+
+            font-family: "Share Tech Mono", monospace;
+
+            font-size: 12px;
+
+            transition: 0.3s;
+        }
+
+        nav ul a:hover {
+            color: var(--red);
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+
+            padding: 120px 7% 80px;
+
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+
+            animation: heroAppear 1.2s ease forwards;
+        }
+
+        @keyframes heroAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        .hero-label {
+            font-family: "Share Tech Mono", monospace;
+
+            color: var(--red);
+
+            letter-spacing: 4px;
+
+            font-size: 13px;
+
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-family: "Orbitron", sans-serif;
+
+            font-size: clamp(55px, 9vw, 115px);
+
+            line-height: 0.88;
+
+            letter-spacing: -5px;
+
+            margin-bottom: 30px;
+
+            text-shadow:
+                0 10px 50px rgba(0,0,0,0.8);
+        }
+
+        .hero h1 span {
+            color: var(--red);
+        }
+
+        .hero p {
+            max-width: 650px;
+
+            color: #c2c2c2;
+
+            font-size: 19px;
+
+            line-height: 1.55;
+
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 25px;
+
+            border: 1px solid var(--red);
+
+            background: var(--red);
+
+            color: white;
+
+            text-decoration: none;
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            clip-path: polygon(
+                9px 0,
+                100% 0,
+                100% calc(100% - 9px),
+                calc(100% - 9px) 100%,
+                0 100%,
+                0 9px
+            );
+
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+
+            background: #ff4b47;
+        }
+
+        .btn.secondary {
+            background: rgba(0,0,0,0.4);
+
+            border-color: rgba(255,255,255,0.35);
+        }
+
+
+        /* =====================================================
+           CINEMATIC SECTION TRANSITION
+        ===================================================== */
+
+        .fade-section {
+            position: relative;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    transparent,
+                    rgba(0,0,0,0.65) 15%,
+                    rgba(0,0,0,0.94) 50%,
+                    #050505 100%
+                );
+        }
+
+
+        /* =====================================================
+           GENERAL SECTIONS
+        ===================================================== */
+
+        section {
+            padding: 100px 7%;
+        }
+
+        .section-heading {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-end;
+
+            gap: 20px;
+
+            margin-bottom: 40px;
+        }
+
+        .section-heading h2 {
+            font-family: "Orbitron", sans-serif;
+
+            font-size: clamp(26px, 4vw, 43px);
+
+            letter-spacing: 1px;
+        }
+
+        .section-heading p {
+            color: var(--gray);
+
+            font-family: "Share Tech Mono", monospace;
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           CONTROLS
+        ===================================================== */
+
+        .controls {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 40px;
+
+            flex-wrap: wrap;
+        }
+
+        .filters {
+            display: flex;
+
+            gap: 8px;
+
+            flex-wrap: wrap;
+        }
+
+        .category {
+            cursor: pointer;
+
+            padding: 10px 15px;
+
+            background: rgba(0,0,0,0.65);
+
+            border: 1px solid var(--border);
+
+            color: #aaa;
+
+            font-family: "Share Tech Mono", monospace;
+
+            font-size: 10px;
+
+            transition: 0.25s;
+        }
+
+        .category:hover,
+        .category.active {
+            color: white;
+
+            background: var(--red);
+
+            border-color: var(--red);
+        }
+
+        .search-box input {
+            width: 250px;
+
+            padding: 11px 15px;
+
+            background: rgba(0,0,0,0.75);
+
+            border: 1px solid var(--border);
+
+            color: white;
+
+            outline: none;
+
+            font-family: "Share Tech Mono", monospace;
+        }
+
+        .search-box input:focus {
+            border-color: var(--red);
+        }
+
+
+        /* =====================================================
+           FEATURED
+        ===================================================== */
+
+        .featured {
+            display: grid;
+
+            grid-template-columns: 1.45fr 1fr;
+
+            min-height: 460px;
+
+            background: rgba(7,7,7,0.92);
+
+            border: 1px solid var(--border);
+
+            overflow: hidden;
+
+            margin-bottom: 60px;
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.45);
+        }
+
+        .featured-image {
+            min-height: 460px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent 45%,
+                    rgba(0,0,0,0.8)
+                ),
+                url("Jason_and_Lucia_Motel_landscape.jpg")
+                center / cover;
+
+            transition: 0.7s;
+        }
+
+        .featured:hover .featured-image {
+            transform: scale(1.04);
+        }
+
+        .featured-info {
+            padding: 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+        .tag {
+            color: var(--red);
+
+            font-family: "Share Tech Mono", monospace;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 14px;
+        }
+
+        .featured-info h3 {
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 34px;
+
+            line-height: 1.1;
+
+            margin-bottom: 20px;
+        }
+
+        .featured-info p {
+            color: #aaa;
+
+            line-height: 1.65;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =====================================================
+           ARTICLE GRID
+        ===================================================== */
+
+        .article-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 22px;
+        }
+
+        .card {
+            background: rgba(8,8,8,0.94);
+
+            border: 1px solid var(--border);
+
+            overflow: hidden;
+
+            position: relative;
+
+            transition:
+                transform 0.35s ease,
+                border-color 0.35s ease,
+                opacity 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+
+            border-color:
+                rgba(229,57,53,0.65);
+        }
+
+        .card-image {
+            height: 220px;
+
+            background-size: cover;
+
+            background-position: center;
+
+            position: relative;
+
+            transition: 0.5s;
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.04);
+        }
+
+        .card-image::after {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    transparent 35%,
+                    rgba(0,0,0,0.9)
+                );
+        }
+
+        .card-body {
+            padding: 22px;
+        }
+
+        .card h3 {
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 18px;
+
+            line-height: 1.3;
+
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #999;
+
+            font-size: 15px;
+
+            line-height: 1.5;
+
+            margin-bottom: 20px;
+        }
+
+        .read {
+            border: none;
+
+            background: none;
+
+            color: var(--gold);
+
+            font-family: "Share Tech Mono", monospace;
+
+            cursor: pointer;
+
+            font-size: 11px;
+
+            padding: 0;
+        }
+
+        .read:hover {
+            color: white;
+        }
+
+
+        /* =====================================================
+           CHARACTER FILES
+        ===================================================== */
+
+        .characters {
+            background:
+                linear-gradient(
+                    to bottom,
+                    #050505,
+                    rgba(0,0,0,0.85),
+                    #050505
+                );
+        }
+
+        .character-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+        }
+
+        .character {
+            height: 350px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+
+            background: #111;
+        }
+
+        .character img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: 0.6s;
+        }
+
+        .character:hover img {
+            transform: scale(1.08);
+        }
+
+        .character::after {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    transparent 30%,
+                    rgba(0,0,0,0.92)
+                );
+        }
+
+        .character-info {
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
+            z-index: 2;
+
+            padding: 20px;
+        }
+
+        .character-info h3 {
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 20px;
+        }
+
+        .character-info span {
+            color: var(--red);
+
+            font-family: "Share Tech Mono", monospace;
+
+            font-size: 10px;
+        }
+
+
+        /* =====================================================
+           ABOUT
+        ===================================================== */
+
+        .about-section {
+            min-height: 500px;
+
+            display: flex;
+
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #050505,
+                    rgba(10,10,10,0.75),
+                    #050505
+                );
+        }
+
+        .about-content {
+            max-width: 850px;
+        }
+
+        .about-content p {
+            color: #aaa;
+
+            font-size: 21px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           NEWSLETTER
+        ===================================================== */
+
+        .newsletter {
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(90,0,0,0.40),
+                    rgba(0,0,0,0.92)
+                );
+
+            border-top: 1px solid var(--border);
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .newsletter h2 {
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 35px;
+
+            margin-bottom: 12px;
+        }
+
+        .newsletter p {
+            color: #999;
+
+            margin-bottom: 25px;
+        }
+
+        .newsletter-form {
+            display: flex;
+
+            justify-content: center;
+
+            max-width: 550px;
+
+            margin: auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+
+            padding: 14px;
+
+            background: #080808;
+
+            border: 1px solid var(--border);
+
+            color: white;
+
+            outline: none;
+        }
+
+        .newsletter-form button {
+            padding: 14px 25px;
+
+            border: none;
+
+            background: var(--red);
+
+            color: white;
+
+            font-family: "Orbitron", sans-serif;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            padding: 35px 7%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            background: #050505;
+
+            border-top: 1px solid var(--border);
+
+            color: #777;
+
+            font-family: "Share Tech Mono", monospace;
+
+            font-size: 10px;
+        }
+
+
+        /* =====================================================
+           MODAL
+        ===================================================== */
+
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0,0,0,0.91);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 25px;
+
+            z-index: 2000;
+
+            backdrop-filter: blur(8px);
+        }
+
+        .modal.active {
+            display: flex;
+
+            animation: modalFade 0.3s ease;
+        }
+
+        @keyframes modalFade {
+
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+
+        }
+
+        .modal-content {
+            width: min(900px, 100%);
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            background: #090909;
+
+            border: 1px solid rgba(255,255,255,0.16);
+
+            position: relative;
+
+            box-shadow:
+                0 30px 100px rgba(0,0,0,0.8);
+        }
+
+        .modal-image {
+            width: 100%;
+
+            height: 370px;
+
+            object-fit: cover;
+        }
+
+        .modal-body {
+            padding: 35px;
+        }
+
+        .modal-body h2 {
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 30px;
+
+            margin-bottom: 15px;
+        }
+
+        .modal-body p {
+            color: #aaa;
+
+            line-height: 1.7;
+
+            font-size: 17px;
+        }
+
+        .close-modal {
+            position: absolute;
+
+            top: 15px;
+            right: 18px;
+
+            width: 40px;
+            height: 40px;
+
+            border: 1px solid rgba(255,255,255,0.3);
+
+            background: rgba(0,0,0,0.85);
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 23px;
+
+            z-index: 5;
+        }
+
+
+        /* =====================================================
+           SCROLL REVEAL
+        ===================================================== */
+
+        .reveal {
+            opacity: 0;
+
+            transform: translateY(50px);
+
+            transition:
+                opacity 0.9s ease,
+                transform 0.9s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media(max-width: 1000px) {
+
+            .article-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .character-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .featured {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-image {
+                min-height: 330px;
+            }
+
+        }
+
+
+        @media(max-width: 650px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            section {
+                padding: 70px 5%;
+            }
+
+            .hero {
+                padding: 110px 5% 70px;
+            }
+
+            .hero h1 {
+                font-size: 55px;
+            }
+
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .character-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .search-box input {
+                width: 100%;
+            }
+
+            .featured-info {
+                padding: 30px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+
+                gap: 10px;
+            }
+
+            footer {
+                flex-direction: column;
+
+                gap: 15px;
+
+                text-align: center;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         BACKGROUND
+    ===================================================== -->
+
+    <div class="background-layer" id="backgroundLayer"></div>
+
+    <div class="background-dark"></div>
+
+    <div class="background-vignette"></div>
+
+    <div class="grid-overlay"></div>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
+
+    <nav id="navbar">
+
+        <div class="logo">
+            NEON<span>//</span>VOID
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="#home">HOME</a>
+            </li>
+
+            <li>
+                <a href="#articles">ARTICLES</a>
+            </li>
+
+            <li>
+                <a href="#characters">CHARACTERS</a>
+            </li>
+
+            <li>
+                <a href="#about">ABOUT</a>
+            </li>
+
+            <li>
+                <a href="#explore">EXPLORE</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- =====================================================
+         HERO
+    ===================================================== -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="hero-label">
+                DIGITAL CULTURE // GAMING // TECHNOLOGY
+            </div>
+
+            <h1>
+                ENTER<br>
+                THE <span>VOID.</span>
+            </h1>
+
+            <p>
+                A digital magazine exploring gaming,
+                futuristic technology, artificial intelligence,
+                digital culture and the worlds that redefine
+                entertainment.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a
+                    href="#articles"
+                    class="btn">
+                    EXPLORE ARTICLES
+                </a>
+
+                <a
+                    href="#characters"
+                    class="btn secondary">
+                    CHARACTER FILES
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ARTICLES
+    ===================================================== -->
+
+    <div class="fade-section">
+
+        <section id="articles">
+
+            <div class="section-heading reveal">
+
+                <div>
+                    <h2>
+                        FEATURED INTEL
+                    </h2>
+                </div>
+
+                <p>
+                    ISSUE 07 // DIGITAL FRONTIER
+                </p>
+
+            </div>
+
+
+            <!-- FILTERS -->
+
+            <div class="controls reveal">
+
+                <div class="filters">
+
+                    <button
+                        class="category active"
+                        data-category="all">
+                        ALL
+                    </button>
+
+                    <button
+                        class="category"
+                        data-category="gaming">
+                        GAMING
+                    </button>
+
+                    <button
+                        class="category"
+                        data-category="gta">
+                        GTA 6
+                    </button>
+
+                    <button
+                        class="category"
+                        data-category="cyberpunk">
+                        CYBERPUNK
+                    </button>
+
+                    <button
+                        class="category"
+                        data-category="god">
+                        GOD OF WAR
+                    </button>
+
+                    <button
+                        class="category"
+                        data-category="tomb">
+                        TOMB RAIDER
+                    </button>
+
+                    <button
+                        class="category"
+                        data-category="marvel">
+                        MARVEL RIVALS
+                    </button>
+
+                    <button
+                        class="category"
+                        data-category="genshin">
+                        GENSHIN IMPACT
+                    </button>
+
+                    <button
+                        class="category"
+                        data-category="technology">
+                        TECHNOLOGY
+                    </button>
+
+                    <button
+                        class="category"
+                        data-category="ai">
+                        AI
+                    </button>
+
+                </div>
+
+
+                <div class="search-box">
+
+                    <input
+                        type="text"
+                        id="search"
+                        placeholder="Search articles...">
+
+                </div>
+
+            </div>
+
+
+            <!-- FEATURED GTA ARTICLE -->
+
+            <div class="featured reveal">
+
+                <div class="featured-image"></div>
+
+                <div class="featured-info">
+
+                    <div class="tag">
+                        GTA 6 // FEATURED
+                    </div>
+
+                    <h3>
+                        GTA 6: THE NEXT
+                        OPEN-WORLD REVOLUTION
+                    </h3>
+
+                    <p>
+                        Rockstar's next major open-world
+                        adventure continues to attract attention
+                        with its huge world, characters,
+                        cinematic presentation and ambitious
+                        gameplay systems.
+                    </p>
+
+                    <button
+                        class="btn read-more"
+                        data-title="GTA 6: The Next Open-World Revolution"
+                        data-category="GTA 6"
+                        data-image="Jason_and_Lucia_Motel_landscape.jpg"
+                        data-description="GTA 6 represents another major step in open-world game design. From its cinematic presentation to its detailed environments and character-driven story, the game is shaping expectations for the next generation of open-world experiences.">
+
+                        READ MORE
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ARTICLE GRID -->
+
+            <div
+                class="article-grid"
+                id="articleGrid">
+
+
+                <!-- GTA 6 -->
+
+                <article
+                    class="card reveal"
+                    data-category="gta">
+
+                    <div
+                        class="card-image"
+                        style="background-image:url('Jason_and_Lucia_Motel_landscape.jpg')">
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="tag">
+                            GTA 6
+                        </div>
+
+                        <h3>
+                            Vice City Returns
+                        </h3>
+
+                        <p>
+                            Exploring the world, atmosphere
+                            and characters surrounding Rockstar's
+                            next major adventure.
+                        </p>
+
+                        <button
+                            class="read"
+                            data-title="Vice City Returns"
+                            data-category="GTA 6"
+                            data-image="Jason_and_Lucia_Motel_landscape.jpg"
+                            data-description="Vice City returns with a modern interpretation of the iconic setting. The combination of new characters, environments and Rockstar's attention to detail creates a new chapter for the franchise.">
+
+                            READ MORE →
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- CYBERPUNK -->
+
+                <article
+                    class="card reveal"
+                    data-category="cyberpunk">
+
+                    <div
+                        class="card-image"
+                        style="background-image:url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1200&q=80')">
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="tag">
+                            CYBERPUNK
+                        </div>
+
+                        <h3>
+                            Life Inside Night City
+                        </h3>
+
+                        <p>
+                            Why cyberpunk worlds continue to
+                            influence modern game design and
+                            digital storytelling.
+                        </p>
+
+                        <button
+                            class="read"
+                            data-title="Life Inside Night City"
+                            data-category="Cyberpunk 2077"
+                            data-image="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1200&q=80"
+                            data-description="Cyberpunk worlds combine futuristic cities, technology, social conflicts and visual storytelling. These ideas continue to influence games and digital entertainment.">
+
+                            READ MORE →
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- GOD OF WAR -->
+
+                <article
+                    class="card reveal"
+                    data-category="god">
+
+                    <div
+                        class="card-image"
+                        style="background-image:url('wp2514508.jpg')">
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="tag">
+                            GOD OF WAR
+                        </div>
+
+                        <h3>
+                            The Legacy of Kratos
+                        </h3>
+
+                        <p>
+                            From Greek mythology to the frozen
+                            worlds of the Norse saga.
+                        </p>
+
+                        <button
+                            class="read"
+                            data-title="The Legacy of Kratos"
+                            data-category="God of War"
+                            data-image="wp2514508.jpg"
+                            data-description="The God of War series transformed Kratos from a straightforward action protagonist into a more complex character. The Norse saga expanded the series through mythology, exploration and character relationships.">
+
+                            READ MORE →
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- TOMB RAIDER -->
+
+                <article
+                    class="card reveal"
+                    data-category="tomb">
+
+                    <div
+                        class="card-image"
+                        style="background-image:url('lara croft.jpg')">
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="tag">
+                            TOMB RAIDER
+                        </div>
+
+                        <h3>
+                            Lara Croft: The Evolution
+                        </h3>
+
+                        <p>
+                            How one of gaming's most recognizable
+                            explorers evolved across generations.
+                        </p>
+
+                        <button
+                            class="read"
+                            data-title="Lara Croft: The Evolution"
+                            data-category="Tomb Raider"
+                            data-image="lara croft.jpg"
+                            data-description="Lara Croft has remained one of gaming's most recognizable protagonists. Across multiple generations, Tomb Raider has experimented with exploration, puzzles, action and cinematic storytelling.">
+
+                            READ MORE →
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- MARVEL RIVALS -->
+
+                <article
+                    class="card reveal"
+                    data-category="marvel">
+
+                    <div
+                        class="card-image"
+                        style="background-image:url('emma-frost-marvel-rivals-x-revolution-409@5@e.jpg')">
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="tag">
+                            MARVEL RIVALS
+                        </div>
+
+                        <h3>
+                            Heroes Enter the Arena
+                        </h3>
+
+                        <p>
+                            A look at hero-based combat,
+                            team composition and fast
+                            multiplayer gameplay.
+                        </p>
+
+                        <button
+                            class="read"
+                            data-title="Heroes Enter the Arena"
+                            data-category="Marvel Rivals"
+                            data-image="emma-frost-marvel-rivals-x-revolution-409@5@e.jpg"
+                            data-description="Marvel Rivals combines recognizable superhero characters with team-based competitive gameplay. Different abilities and team combinations create a constantly changing battlefield.">
+
+                            READ MORE →
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- GENSHIN IMPACT -->
+
+                <article
+                    class="card reveal"
+                    data-category="genshin">
+
+                    <div
+                        class="card-image"
+                        style="background-image:url('genshin-impact-new-key-art-gamescom-1.webp')">
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="tag">
+                            GENSHIN IMPACT
+                        </div>
+
+                        <h3>
+                            Exploring the World of Teyvat
+                        </h3>
+
+                        <p>
+                            A look at exploration, characters,
+                            combat and the constantly expanding
+                            world of Genshin Impact.
+                        </p>
+
+                        <button
+                            class="read"
+                            data-title="Exploring the World of Teyvat"
+                            data-category="Genshin Impact"
+                            data-image="genshin-impact-new-key-art-gamescom-1.webp"
+                            data-description="Genshin Impact combines open-world exploration, elemental combat, character progression and a continuously expanding world. Its colorful environments and large-scale regions make exploration an important part of the experience.">
+
+                            READ MORE →
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- AI -->
+
+                <article
+                    class="card reveal"
+                    data-category="ai">
+
+                    <div
+                        class="card-image"
+                        style="background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80')">
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="tag">
+                            AI
+                        </div>
+
+                        <h3>
+                            AI Is Changing Game Development
+                        </h3>
+
+                        <p>
+                            From procedural systems to intelligent
+                            NPCs, artificial intelligence is reshaping
+                            development.
+                        </p>
+
+                        <button
+                            class="read"
+                            data-title="AI Is Changing Game Development"
+                            data-category="Artificial Intelligence"
+                            data-image="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80"
+                            data-description="Artificial intelligence is becoming an increasingly important tool in game development. Developers can use AI for procedural systems, experimentation, animation workflows and more intelligent game-world behavior.">
+
+                            READ MORE →
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- GAMING -->
+
+                <article
+                    class="card reveal"
+                    data-category="gaming">
+
+                    <div
+                        class="card-image"
+                        style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80')">
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="tag">
+                            GAMING
+                        </div>
+
+                        <h3>
+                            Why Competitive Games Feel So Fast
+                        </h3>
+
+                        <p>
+                            Reaction time, movement and game
+                            design combine to create modern
+                            competitive gameplay.
+                        </p>
+
+                        <button
+                            class="read"
+                            data-title="Why Competitive Games Feel So Fast"
+                            data-category="Gaming"
+                            data-image="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80"
+                            data-description="Modern competitive games combine fast movement, precise controls and visual feedback. These systems reward awareness, reaction time and decision making.">
+
+                            READ MORE →
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- TECHNOLOGY -->
+
+                <article
+                    class="card reveal"
+                    data-category="technology">
+
+                    <div
+                        class="card-image"
+                        style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80')">
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="tag">
+                            TECHNOLOGY
+                        </div>
+
+                        <h3>
+                            The Hardware Behind Modern Games
+                        </h3>
+
+                        <p>
+                            GPUs, SSDs and modern processors
+                            are transforming the gaming experience.
+                        </p>
+
+                        <button
+                            class="read"
+                            data-title="The Hardware Behind Modern Games"
+                            data-category="Technology"
+                            data-image="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80"
+                            data-description="Modern gaming relies on several hardware technologies working together. Powerful GPUs, fast processors and SSD storage help games deliver detailed worlds and responsive gameplay.">
+
+                            READ MORE →
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- OPEN WORLD -->
+
+                <article
+                    class="card reveal"
+                    data-category="gaming">
+
+                    <div
+                        class="card-image"
+                        style="background-image:url('https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=1200&q=80')">
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="tag">
+                            GAMING
+                        </div>
+
+                        <h3>
+                            The Rise of Open Worlds
+                        </h3>
+
+                        <p>
+                            Why players continue to explore
+                            massive interactive environments.
+                        </p>
+
+                        <button
+                            class="read"
+                            data-title="The Rise of Open Worlds"
+                            data-category="Gaming"
+                            data-image="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=1200&q=80"
+                            data-description="Open-world games give players freedom to explore environments at their own pace. Modern hardware allows developers to create increasingly detailed and interactive worlds.">
+
+                            READ MORE →
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FUTURE AI -->
+
+                <article
+                    class="card reveal"
+                    data-category="ai">
+
+                    <div
+                        class="card-image"
+                        style="background-image:url('https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&w=1200&q=80')">
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="tag">
+                            AI
+                        </div>
+
+                        <h3>
+                            Humans and Machines
+                        </h3>
+
+                        <p>
+                            Exploring the growing relationship
+                            between artificial intelligence
+                            and creativity.
+                        </p>
+
+                        <button
+                            class="read"
+                            data-title="Humans and Machines"
+                            data-category="Artificial Intelligence"
+                            data-image="https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&w=1200&q=80"
+                            data-description="AI tools are increasingly becoming part of creative workflows. Human creativity and machine-assisted tools can work together across design, animation, writing and development.">
+
+                            READ MORE →
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FUTURE CITIES -->
+
+                <article
+                    class="card reveal"
+                    data-category="cyberpunk">
+
+                    <div
+                        class="card-image"
+                        style="background-image:url('https://images.unsplash.com/photo-1483721310020-03333e577078?auto=format&fit=crop&w=1200&q=80')">
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="tag">
+                            CYBERPUNK
+                        </div>
+
+                        <h3>
+                            Cities of the Future
+                        </h3>
+
+                        <p>
+                            Neon cities, megastructures and the
+                            visual language of futuristic worlds.
+                        </p>
+
+                        <button
+                            class="read"
+                            data-title="Cities of the Future"
+                            data-category="Cyberpunk"
+                            data-image="https://images.unsplash.com/photo-1483721310020-03333e577078?auto=format&fit=crop&w=1200&q=80"
+                            data-description="Cyberpunk visual design often combines dense cities, bright artificial lighting and advanced technology. These ideas continue to influence games, films and digital art.">
+
+                            READ MORE →
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- INTERACTIVE WORLDS -->
+
+                <article
+                    class="card reveal"
+                    data-category="gaming">
+
+                    <div
+                        class="card-image"
+                        style="background-image:url('https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=1200&q=80')">
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="tag">
+                            GAMING
+                        </div>
+
+                        <h3>
+                            The Future of Interactive Worlds
+                        </h3>
+
+                        <p>
+                            Games are becoming more cinematic,
+                            interactive and socially connected.
+                        </p>
+
+                        <button
+                            class="read"
+                            data-title="The Future of Interactive Worlds"
+                            data-category="Gaming"
+                            data-image="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=1200&q=80"
+                            data-description="Interactive entertainment continues to combine storytelling, technology and social experiences. Future games may offer increasingly dynamic worlds and player-driven experiences.">
+
+                            READ MORE →
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CHARACTER FILES
+        ================================================= -->
+
+        <section
+            class="characters"
+            id="characters">
+
+            <div class="section-heading reveal">
+
+                <div>
+                    <h2>
+                        CHARACTER FILES
+                    </h2>
+                </div>
+
+                <p>
+                    DATABASE // CLASSIFIED
+                </p>
+
+            </div>
+
+
+            <div class="character-grid">
+
+
+                <div class="character reveal">
+
+                    <img
+                        src="emma-frost-marvel-rivals-x-revolution-409@5@e.jpg"
+                        alt="Emma Frost">
+
+                    <div class="character-info">
+
+                        <span>
+                            MARVEL RIVALS
+                        </span>
+
+                        <h3>
+                            EMMA FROST
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="character reveal">
+
+                    <img
+                        src="Jason_and_Lucia_Motel_landscape.jpg"
+                        alt="Lucia and Jason">
+
+                    <div class="character-info">
+
+                        <span>
+                            GTA 6
+                        </span>
+
+                        <h3>
+                            LUCIA & JASON
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="character reveal">
+
+                    <img
+                        src="lara croft.jpg"
+                        alt="Lara Croft">
+
+                    <div class="character-info">
+
+                        <span>
+                            TOMB RAIDER
+                        </span>
+
+                        <h3>
+                            LARA CROFT
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="character reveal">
+
+                    <img
+                        src="wp2514508.jpg"
+                        alt="Kratos">
+
+                    <div class="character-info">
+
+                        <span>
+                            GOD OF WAR
+                        </span>
+
+                        <h3>
+                            KRATOS
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ABOUT
+        ================================================= -->
+
+        <section
+            class="about-section"
+            id="about">
+
+            <div class="about-content reveal">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h2>
+                            ABOUT NEON//VOID
+                        </h2>
+                    </div>
+
+                    <p>
+                        DIGITAL MAGAZINE
+                    </p>
+
+                </div>
+
+                <p>
+                    NEON//VOID is a digital magazine focused on
+                    gaming, technology, artificial intelligence
+                    and digital culture.
+                    <br><br>
+                    From massive open-world adventures to
+                    competitive multiplayer games and emerging
+                    technologies, the magazine explores the ideas
+                    shaping the next generation of digital
+                    entertainment.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             NEWSLETTER
+        ================================================= -->
+
+        <section
+            class="newsletter"
+            id="explore">
+
+            <h2>
+                STAY IN THE VOID
+            </h2>
+
+            <p>
+                Get new gaming and technology articles directly
+                in your inbox.
+            </p>
+
+            <form
+                class="newsletter-form"
+                id="newsletterForm">
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required>
+
+                <button type="submit">
+                    SUBSCRIBE
+                </button>
+
+            </form>
+
+        </section>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer>
+
+        <div>
+            NEON//VOID © 2026
+        </div>
+
+        <div>
+            GAMING // TECHNOLOGY // DIGITAL CULTURE
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         ARTICLE MODAL
+    ===================================================== -->
+
+    <div
+        class="modal"
+        id="articleModal">
+
+        <div class="modal-content">
+
+            <button
+                class="close-modal"
+                id="closeModal">
+                ×
+            </button>
+
+            <img
+                class="modal-image"
+                id="modalImage"
+                src=""
+                alt="Article image">
+
+            <div class="modal-body">
+
+                <div
+                    class="tag"
+                    id="modalCategory">
+                    CATEGORY
+                </div>
+
+                <h2 id="modalTitle">
+                    Article Title
+                </h2>
+
+                <p id="modalDescription">
+                    Article description.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+
+
+        /* =================================================
+           ELEMENTS
+        ================================================= */
+
+        const cards =
+            document.querySelectorAll(".card");
+
+        const categoryButtons =
+            document.querySelectorAll(".category");
+
+        const search =
+            document.getElementById("search");
+
+        const navbar =
+            document.getElementById("navbar");
+
+        const backgroundLayer =
+            document.getElementById("backgroundLayer");
+
+        let selectedCategory = "all";
+
+
+        /* =================================================
+           FILTER SYSTEM
+        ================================================= */
+
+        function filterCards() {
+
+            const searchText =
+                search.value
+                .toLowerCase()
+                .trim();
+
+
+            cards.forEach(card => {
+
+                const category =
+                    card.dataset.category;
+
+                const content =
+                    card.innerText.toLowerCase();
+
+
+                const matchesCategory =
+                    selectedCategory === "all" ||
+                    category === selectedCategory;
+
+
+                const matchesSearch =
+                    content.includes(searchText);
+
+
+                if (
+                    matchesCategory &&
+                    matchesSearch
+                ) {
+
+                    card.style.display = "block";
+
+                    setTimeout(() => {
+
+                        card.style.opacity = "1";
+
+                    }, 20);
+
+                } else {
+
+                    card.style.opacity = "0";
+
+                    setTimeout(() => {
+
+                        card.style.display = "none";
+
+                    }, 250);
+
+                }
+
+            });
+
+        }
+
+
+        categoryButtons.forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    categoryButtons.forEach(btn => {
+
+                        btn.classList.remove("active");
+
+                    });
+
+
+                    button.classList.add("active");
+
+
+                    selectedCategory =
+                        button.dataset.category;
+
+
+                    filterCards();
+
+                }
+            );
+
+        });
+
+
+        search.addEventListener(
+            "input",
+            filterCards
+        );
+
+
+        /* =================================================
+           CINEMATIC SCROLL
+        ================================================= */
+
+        window.addEventListener(
+            "scroll",
+            () => {
+
+                const scrollY =
+                    window.scrollY;
+
+
+                const maxScroll =
+                    document.documentElement
+                    .scrollHeight -
+                    window.innerHeight;
+
+
+                const progress =
+                    Math.min(
+                        scrollY / maxScroll,
+                        1
+                    );
+
+
+                /* Navbar */
+
+                if (scrollY > 60) {
+
+                    navbar.classList.add(
+                        "scrolled"
+                    );
+
+                } else {
+
+                    navbar.classList.remove(
+                        "scrolled"
+                    );
+
+                }
+
+
+                /* Background movement */
+
+                backgroundLayer.style.backgroundPosition =
+                    `center ${progress * 35}%`;
+
+
+                /*
+                    Background becomes progressively
+                    darker as the user moves down.
+                */
+
+                const darkness =
+                    0.35 +
+                    (progress * 0.40);
+
+
+                backgroundLayer.style.backgroundImage =
+                    `
+                    linear-gradient(
+                        rgba(0,0,0,${darkness}),
+                        rgba(0,0,0,${Math.min(
+                            darkness + 0.35,
+                            0.95
+                        )})
+                    ),
+                    url("Lucia_Caminos_02.jpg")
+                    `;
+
+            }
+        );
+
+
+        /* =================================================
+           SCROLL REVEAL
+        ================================================= */
+
+        const revealElements =
+            document.querySelectorAll(
+                ".reveal"
+            );
+
+
+        const revealObserver =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "visible"
+                            );
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.12
+                }
+            );
+
+
+        revealElements.forEach(element => {
+
+            revealObserver.observe(
+                element
+            );
+
+        });
+
+
+        /* =================================================
+           ARTICLE MODAL
+        ================================================= */
+
+        const modal =
+            document.getElementById(
+                "articleModal"
+            );
+
+        const closeModal =
+            document.getElementById(
+                "closeModal"
+            );
+
+        const modalImage =
+            document.getElementById(
+                "modalImage"
+            );
+
+        const modalTitle =
+            document.getElementById(
+                "modalTitle"
+            );
+
+        const modalCategory =
+            document.getElementById(
+                "modalCategory"
+            );
+
+        const modalDescription =
+            document.getElementById(
+                "modalDescription"
+            );
+
+
+        const readButtons =
+            document.querySelectorAll(
+                ".read-more, .read"
+            );
+
+
+        readButtons.forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    modalTitle.textContent =
+                        button.dataset.title;
+
+
+                    modalCategory.textContent =
+                        button.dataset.category;
+
+
+                    modalDescription.textContent =
+                        button.dataset.description;
+
+
+                    modalImage.src =
+                        button.dataset.image;
+
+
+                    modal.classList.add(
+                        "active"
+                    );
+
+
+                    document.body.style.overflow =
+                        "hidden";
+
+                }
+            );
+
+        });
+
+
+        function closeArticleModal() {
+
+            modal.classList.remove(
+                "active"
+            );
+
+            document.body.style.overflow =
+                "auto";
+
+        }
+
+
+        closeModal.addEventListener(
+            "click",
+            closeArticleModal
+        );
+
+
+        modal.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target === modal
+                ) {
+
+                    closeArticleModal();
+
+                }
+
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    closeArticleModal();
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           NEWSLETTER
+        ================================================= */
+
+        const newsletterForm =
+            document.getElementById(
+                "newsletterForm"
+            );
+
+
+        newsletterForm.addEventListener(
+            "submit",
+            event => {
+
+                event.preventDefault();
+
+
+                const email =
+                    document.getElementById(
+                        "email"
+                    ).value;
+
+
+                if (email) {
+
+                    alert(
+                        "Welcome to NEON//VOID! Your subscription has been registered."
+                    );
+
+
+                    newsletterForm.reset();
+
+                }
+
+            }
+        );
+
+
+    </script>
+
+</body>
+</html>
