@@ -13,10 +13,6 @@
 
     <style>
 
-        /* =====================================================
-           GLOBAL
-        ===================================================== */
-
         * {
             margin: 0;
             padding: 0;
@@ -45,7 +41,6 @@
             overflow-x: hidden;
         }
 
-
         /* =====================================================
            CINEMATIC BACKGROUND
         ===================================================== */
@@ -59,7 +54,7 @@
                     rgba(0,0,0,0.35),
                     rgba(0,0,0,0.75)
                 ),
-                url("Lucia_Caminos_02.jpg")
+                url("assets/Lucia_Caminos_02.jpg")
                 center center / cover no-repeat;
 
             z-index: -5;
@@ -87,7 +82,6 @@
                 );
 
             z-index: -4;
-
             pointer-events: none;
         }
 
@@ -103,7 +97,6 @@
                 );
 
             z-index: -3;
-
             pointer-events: none;
         }
 
@@ -125,10 +118,8 @@
             background-size: 60px 60px;
 
             z-index: -2;
-
             pointer-events: none;
         }
-
 
         /* =====================================================
            NAVBAR
@@ -139,7 +130,6 @@
             top: 0;
             left: 0;
             width: 100%;
-
             height: 72px;
 
             display: flex;
@@ -155,7 +145,6 @@
             backdrop-filter: blur(14px);
 
             z-index: 1000;
-
             transition: 0.3s;
         }
 
@@ -165,10 +154,8 @@
 
         .logo {
             font-family: "Orbitron", sans-serif;
-
             font-size: 21px;
             font-weight: 800;
-
             letter-spacing: 3px;
         }
 
@@ -178,19 +165,15 @@
 
         nav ul {
             display: flex;
-
             gap: 30px;
-
             list-style: none;
         }
 
         nav ul a {
             color: #ccc;
-
             text-decoration: none;
 
             font-family: "Share Tech Mono", monospace;
-
             font-size: 12px;
 
             transition: 0.3s;
@@ -199,7 +182,6 @@
         nav ul a:hover {
             color: var(--red);
         }
-
 
         /* =====================================================
            HERO
@@ -218,12 +200,10 @@
 
         .hero-content {
             max-width: 800px;
-
             animation: heroAppear 1.2s ease forwards;
         }
 
         @keyframes heroAppear {
-
             from {
                 opacity: 0;
                 transform: translateY(35px);
@@ -233,7 +213,6 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-
         }
 
         .hero-label {
@@ -281,9 +260,7 @@
 
         .hero-buttons {
             display: flex;
-
             gap: 15px;
-
             flex-wrap: wrap;
         }
 
@@ -320,16 +297,13 @@
 
         .btn:hover {
             transform: translateY(-3px);
-
             background: #ff4b47;
         }
 
         .btn.secondary {
             background: rgba(0,0,0,0.4);
-
             border-color: rgba(255,255,255,0.35);
         }
-
 
         /* =====================================================
            CINEMATIC SECTION TRANSITION
@@ -347,7 +321,6 @@
                     #050505 100%
                 );
         }
-
 
         /* =====================================================
            GENERAL SECTIONS
@@ -385,7 +358,6 @@
             font-size: 11px;
         }
 
-
         /* =====================================================
            CONTROLS
         ===================================================== */
@@ -404,9 +376,7 @@
 
         .filters {
             display: flex;
-
             gap: 8px;
-
             flex-wrap: wrap;
         }
 
@@ -457,7 +427,6 @@
             border-color: var(--red);
         }
 
-
         /* =====================================================
            FEATURED
         ===================================================== */
@@ -490,7 +459,7 @@
                     transparent 45%,
                     rgba(0,0,0,0.8)
                 ),
-                url("Jason_and_Lucia_Motel_landscape.jpg")
+                url("assets/Jason_and_Lucia_Motel_landscape.jpg")
                 center / cover;
 
             transition: 0.7s;
@@ -539,7 +508,6 @@
 
             margin-bottom: 25px;
         }
-
 
         /* =====================================================
            ARTICLE GRID
@@ -650,7 +618,6 @@
             color: white;
         }
 
-
         /* =====================================================
            CHARACTER FILES
         ===================================================== */
@@ -738,7 +705,6 @@
             font-size: 10px;
         }
 
-
         /* =====================================================
            ABOUT
         ===================================================== */
@@ -770,7 +736,6 @@
 
             line-height: 1.7;
         }
-
 
         /* =====================================================
            NEWSLETTER
@@ -843,7 +808,6 @@
             cursor: pointer;
         }
 
-
         /* =====================================================
            FOOTER
         ===================================================== */
@@ -867,7 +831,6 @@
 
             font-size: 10px;
         }
-
 
         /* =====================================================
            MODAL
@@ -901,7 +864,6 @@
         }
 
         @keyframes modalFade {
-
             from {
                 opacity: 0;
             }
@@ -909,7 +871,6 @@
             to {
                 opacity: 1;
             }
-
         }
 
         .modal-content {
@@ -979,7 +940,6 @@
             z-index: 5;
         }
 
-
         /* =====================================================
            SCROLL REVEAL
         ===================================================== */
@@ -999,7 +959,6 @@
 
             transform: translateY(0);
         }
-
 
         /* =====================================================
            RESPONSIVE
@@ -1022,9 +981,7 @@
             .featured-image {
                 min-height: 330px;
             }
-
         }
-
 
         @media(max-width: 650px) {
 
@@ -1087,19 +1044,14 @@
 
                 flex-direction: column;
             }
-
         }
 
     </style>
 </head>
 
-
 <body>
 
-
-    <!-- =====================================================
-         BACKGROUND
-    ===================================================== -->
+    <!-- BACKGROUND -->
 
     <div class="background-layer" id="backgroundLayer"></div>
 
@@ -1110,9 +1062,7 @@
     <div class="grid-overlay"></div>
 
 
-    <!-- =====================================================
-         NAVBAR
-    ===================================================== -->
+    <!-- NAVBAR -->
 
     <nav id="navbar">
 
@@ -1147,9 +1097,7 @@
     </nav>
 
 
-    <!-- =====================================================
-         HERO
-    ===================================================== -->
+    <!-- HERO -->
 
     <section class="hero" id="home">
 
@@ -1192,9 +1140,7 @@
     </section>
 
 
-    <!-- =====================================================
-         ARTICLES
-    ===================================================== -->
+    <!-- ARTICLES -->
 
     <div class="fade-section">
 
@@ -1325,7 +1271,7 @@
                         class="btn read-more"
                         data-title="GTA 6: The Next Open-World Revolution"
                         data-category="GTA 6"
-                        data-image="Jason_and_Lucia_Motel_landscape.jpg"
+                        data-image="assets/Jason_and_Lucia_Motel_landscape.jpg"
                         data-description="GTA 6 represents another major step in open-world game design. From its cinematic presentation to its detailed environments and character-driven story, the game is shaping expectations for the next generation of open-world experiences.">
 
                         READ MORE
@@ -1352,7 +1298,7 @@
 
                     <div
                         class="card-image"
-                        style="background-image:url('Jason_and_Lucia_Motel_landscape.jpg')">
+                        style="background-image:url('assets/Jason_and_Lucia_Motel_landscape.jpg')">
                     </div>
 
                     <div class="card-body">
@@ -1375,7 +1321,7 @@
                             class="read"
                             data-title="Vice City Returns"
                             data-category="GTA 6"
-                            data-image="Jason_and_Lucia_Motel_landscape.jpg"
+                            data-image="assets/Jason_and_Lucia_Motel_landscape.jpg"
                             data-description="Vice City returns with a modern interpretation of the iconic setting. The combination of new characters, environments and Rockstar's attention to detail creates a new chapter for the franchise.">
 
                             READ MORE →
@@ -1438,7 +1384,7 @@
 
                     <div
                         class="card-image"
-                        style="background-image:url('wp2514508.jpg')">
+                        style="background-image:url('assets/wp2514508.jpg')">
                     </div>
 
                     <div class="card-body">
@@ -1460,7 +1406,7 @@
                             class="read"
                             data-title="The Legacy of Kratos"
                             data-category="God of War"
-                            data-image="wp2514508.jpg"
+                            data-image="assets/wp2514508.jpg"
                             data-description="The God of War series transformed Kratos from a straightforward action protagonist into a more complex character. The Norse saga expanded the series through mythology, exploration and character relationships.">
 
                             READ MORE →
@@ -1480,7 +1426,7 @@
 
                     <div
                         class="card-image"
-                        style="background-image:url('lara croft.jpg')">
+                        style="background-image:url('assets/897006-3840x2160-desktop-4k-tomb-raider-game-wallpaper-photo.jpg')">
                     </div>
 
                     <div class="card-body">
@@ -1502,7 +1448,7 @@
                             class="read"
                             data-title="Lara Croft: The Evolution"
                             data-category="Tomb Raider"
-                            data-image="lara croft.jpg"
+                            data-image="assets/897006-3840x2160-desktop-4k-tomb-raider-game-wallpaper-photo.jpg"
                             data-description="Lara Croft has remained one of gaming's most recognizable protagonists. Across multiple generations, Tomb Raider has experimented with exploration, puzzles, action and cinematic storytelling.">
 
                             READ MORE →
@@ -1522,7 +1468,7 @@
 
                     <div
                         class="card-image"
-                        style="background-image:url('emma-frost-marvel-rivals-x-revolution-409@5@e.jpg')">
+                        style="background-image:url('assets/emma-frost-marvel-rivals-x-revolution-409@5@e.jpg')">
                     </div>
 
                     <div class="card-body">
@@ -1545,7 +1491,7 @@
                             class="read"
                             data-title="Heroes Enter the Arena"
                             data-category="Marvel Rivals"
-                            data-image="emma-frost-marvel-rivals-x-revolution-409@5@e.jpg"
+                            data-image="assets/emma-frost-marvel-rivals-x-revolution-409@5@e.jpg"
                             data-description="Marvel Rivals combines recognizable superhero characters with team-based competitive gameplay. Different abilities and team combinations create a constantly changing battlefield.">
 
                             READ MORE →
@@ -1565,7 +1511,7 @@
 
                     <div
                         class="card-image"
-                        style="background-image:url('genshin-impact-new-key-art-gamescom-1.webp')">
+                        style="background-image:url('assets/genshin-impact-new-key-art-gamescom-1.webp')">
                     </div>
 
                     <div class="card-body">
@@ -1588,7 +1534,7 @@
                             class="read"
                             data-title="Exploring the World of Teyvat"
                             data-category="Genshin Impact"
-                            data-image="genshin-impact-new-key-art-gamescom-1.webp"
+                            data-image="assets/genshin-impact-new-key-art-gamescom-1.webp"
                             data-description="Genshin Impact combines open-world exploration, elemental combat, character progression and a continuously expanding world. Its colorful environments and large-scale regions make exploration an important part of the experience.">
 
                             READ MORE →
@@ -1896,15 +1842,12 @@
 
                 </article>
 
-
             </div>
 
         </section>
 
 
-        <!-- =================================================
-             CHARACTER FILES
-        ================================================= -->
+        <!-- CHARACTER FILES -->
 
         <section
             class="characters"
@@ -1931,7 +1874,7 @@
                 <div class="character reveal">
 
                     <img
-                        src="emma-frost-marvel-rivals-x-revolution-409@5@e.jpg"
+                        src="assets/emma-frost-marvel-rivals-x-revolution-409@5@e.jpg"
                         alt="Emma Frost">
 
                     <div class="character-info">
@@ -1952,7 +1895,7 @@
                 <div class="character reveal">
 
                     <img
-                        src="Jason_and_Lucia_Motel_landscape.jpg"
+                        src="assets/Jason_and_Lucia_Motel_landscape.jpg"
                         alt="Lucia and Jason">
 
                     <div class="character-info">
@@ -1973,7 +1916,7 @@
                 <div class="character reveal">
 
                     <img
-                        src="lara croft.jpg"
+                        src="assets/897006-3840x2160-desktop-4k-tomb-raider-game-wallpaper-photo.jpg"
                         alt="Lara Croft">
 
                     <div class="character-info">
@@ -1994,7 +1937,7 @@
                 <div class="character reveal">
 
                     <img
-                        src="wp2514508.jpg"
+                        src="assets/wp2514508.jpg"
                         alt="Kratos">
 
                     <div class="character-info">
@@ -2017,9 +1960,7 @@
         </section>
 
 
-        <!-- =================================================
-             ABOUT
-        ================================================= -->
+        <!-- ABOUT -->
 
         <section
             class="about-section"
@@ -2058,9 +1999,7 @@
         </section>
 
 
-        <!-- =================================================
-             NEWSLETTER
-        ================================================= -->
+        <!-- NEWSLETTER -->
 
         <section
             class="newsletter"
@@ -2093,13 +2032,10 @@
 
         </section>
 
-
     </div>
 
 
-    <!-- =====================================================
-         FOOTER
-    ===================================================== -->
+    <!-- FOOTER -->
 
     <footer>
 
@@ -2114,9 +2050,7 @@
     </footer>
 
 
-    <!-- =====================================================
-         ARTICLE MODAL
-    ===================================================== -->
+    <!-- ARTICLE MODAL -->
 
     <div
         class="modal"
@@ -2159,12 +2093,9 @@
     </div>
 
 
-    <!-- =====================================================
-         JAVASCRIPT
-    ===================================================== -->
+    <!-- JAVASCRIPT -->
 
     <script>
-
 
         /* =================================================
            ELEMENTS
@@ -2199,7 +2130,6 @@
                 .toLowerCase()
                 .trim();
 
-
             cards.forEach(card => {
 
                 const category =
@@ -2208,15 +2138,12 @@
                 const content =
                     card.innerText.toLowerCase();
 
-
                 const matchesCategory =
                     selectedCategory === "all" ||
                     category === selectedCategory;
 
-
                 const matchesSearch =
                     content.includes(searchText);
-
 
                 if (
                     matchesCategory &&
@@ -2260,13 +2187,10 @@
 
                     });
 
-
                     button.classList.add("active");
-
 
                     selectedCategory =
                         button.dataset.category;
-
 
                     filterCards();
 
@@ -2293,19 +2217,16 @@
                 const scrollY =
                     window.scrollY;
 
-
                 const maxScroll =
                     document.documentElement
                     .scrollHeight -
                     window.innerHeight;
-
 
                 const progress =
                     Math.min(
                         scrollY / maxScroll,
                         1
                     );
-
 
                 /* Navbar */
 
@@ -2349,7 +2270,7 @@
                             0.95
                         )})
                     ),
-                    url("Lucia_Caminos_02.jpg")
+                    url("assets/Lucia_Caminos_02.jpg")
                     `;
 
             }
@@ -2364,7 +2285,6 @@
             document.querySelectorAll(
                 ".reveal"
             );
-
 
         const revealObserver =
             new IntersectionObserver(
@@ -2450,23 +2370,18 @@
                     modalTitle.textContent =
                         button.dataset.title;
 
-
                     modalCategory.textContent =
                         button.dataset.category;
-
 
                     modalDescription.textContent =
                         button.dataset.description;
 
-
                     modalImage.src =
                         button.dataset.image;
-
 
                     modal.classList.add(
                         "active"
                     );
-
 
                     document.body.style.overflow =
                         "hidden";
@@ -2543,12 +2458,10 @@
 
                 event.preventDefault();
 
-
                 const email =
                     document.getElementById(
                         "email"
                     ).value;
-
 
                 if (email) {
 
@@ -2556,14 +2469,12 @@
                         "Welcome to NEON//VOID! Your subscription has been registered."
                     );
 
-
                     newsletterForm.reset();
 
                 }
 
             }
         );
-
 
     </script>
 
